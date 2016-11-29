@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#BBBBBB"> <!-- The ripple will be red -->
+    <item>
+        <color android:color="#2d5986" />
+    </item>
+    <!-- make sure the ripple doesn't exceed the bounds -->
+    <item android:id="@android:id/mask">
+        <shape android:shape="rectangle">
+            <solid android:color="#336699" />
+        </shape>
+    </item>
+</ripple>

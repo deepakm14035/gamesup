@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_add_event"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.iiitd.purusharth.projectx.AddEvent"
+    tools:showIn="@layout/activity_add_event">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <ScrollView
+            android:id="@+id/nsv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.9"
+            android:fadeScrollbars="false"
+            android:overScrollMode="always"
+            android:scrollbarSize="@dimen/album_cover_height">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="15dp"
+                    android:text="Enter Details"
+                    android:textSize="18sp"
+                    tools:fontFamily="sans-serif-light" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:fontFamily="sans-serif-light"
+                        android:paddingBottom="5dp"
+                        android:text="Select an Activity"
+                        android:textColor="#666666"
+                        android:textSize="16sp" />
+
+                    <Spinner
+                        android:id="@+id/spinner"
+                        android:layout_width="100dp"
+                        android:layout_height="35dp"
+                        android:layout_weight="0.87"
+                        android:background="@drawable/spinner_background"
+                        android:backgroundTint="#bbbbbb"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="5dp"
+                        android:paddingTop="5dp"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="-30dp"
+                        android:layout_marginRight="30dp"
+                        android:src="@drawable/ic_drop" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:fontFamily="sans-serif-light"
+                        android:paddingBottom="5dp"
+                        android:text="Select a Venue    "
+                        android:textColor="#666666"
+                        android:textSize="16sp" />
+
+                    <Spinner
+                        android:id="@+id/spinner1"
+                        android:layout_width="100dp"
+                        android:layout_height="35dp"
+                        android:layout_weight="0.87"
+                        android:background="@drawable/spinner_background"
+                        android:backgroundTint="#bbbbbb"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="5dp"
+                        android:paddingTop="5dp"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="-30dp"
+                        android:layout_marginRight="30dp"
+                        android:src="@drawable/ic_drop" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll1"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <FrameLayout
+                            android:id="@+id/container1"
+                            android:layout_width="match_parent"
+                            android:layout_height="250dp"></FrameLayout>
+
+                        <ImageView
+                            android:id="@+id/transparent_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="250dp" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="sans-serif-light"
+                    android:paddingStart="20dp"
+                    android:text="Enter Details  "
+                    android:textColor="#666666"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/spinner_background"
+                    android:backgroundTint="#bbbbbb"
+                    android:hint="Enter all the relevant details"
+                    android:inputType="textMultiLine"
+                    android:padding="10dp"
+                    android:textAlignment="textStart"
+                    android:textColorHint="#999999"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/ea1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="sans-serif-light"
+                    android:paddingStart="20dp"
+                    android:text="Detailed Address  "
+                    android:textColor="#666666"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/ea2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/spinner_background"
+                    android:backgroundTint="#bbbbbb"
+                    android:hint="Enter all the relevant address details"
+                    android:inputType="textMultiLine"
+                    android:padding="10dp"
+                    android:textAlignment="textStart"
+                    android:textColorHint="#999999"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/create"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_weight=".1"
+            android:background="@drawable/ripple"
+            android:fontFamily="sans-serif-light"
+            android:text="Create"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "705340025923",
+    "project_id": "iiitd-meetup"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:705340025923:android:3c526ec6bfabbf81",
+        "android_client_info": {
+          "package_name": "com.iiitd.purusharth.projectx"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "705340025923-314s6i6vkvmois7thjr5ink56iabtbvk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.iiitd.purusharth.projectx",
+            "certificate_hash": "6D0F97130854FB290B06DDDC50F970D74879DEAC"
+          }
+        },
+        {
+          "client_id": "705340025923-55fmoqvmfv15klbd1vhpt27v1nt2vtuo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDM-77fpP06V3HtwlIMWxAkCvzPPauZiHw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
