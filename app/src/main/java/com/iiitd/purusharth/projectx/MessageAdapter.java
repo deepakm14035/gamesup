@@ -51,7 +51,7 @@ public class MessageAdapter extends BaseAdapter {
         MessageViewHolder holder;
         LayoutInflater messageInflater = (LayoutInflater) messageContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         Message thisMessage = messageList.get(position);
-        if (thisMessage.name.toLowerCase().equalsIgnoreCase(MainActivity.uname.toLowerCase())) {
+        if (thisMessage.name.toLowerCase().equalsIgnoreCase("shit")) {
             convertView = messageInflater.inflate(R.layout.message_layout, parent, false);
         } else {
             convertView = messageInflater.inflate(R.layout.message_layout_2, parent, false);

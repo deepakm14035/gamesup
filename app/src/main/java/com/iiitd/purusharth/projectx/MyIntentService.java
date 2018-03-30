@@ -13,17 +13,9 @@ import android.content.SharedPreferences;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
 
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
@@ -82,13 +74,12 @@ public class MyIntentService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         queue = Volley.newRequestQueue(this);
-        makeJsonReq();
-        Log.e("MC", "" + MainActivity.size);
+        // makeJsonReq();
     }
-
+/*
     private void makeJsonReq() {
 
-        String url = "http://192.168.55.245:3000/activities/" + MainActivity.uid;
+        String url = "http://192.168.55.245:3000/activities/";
 
         JsonArrayRequest jsonObjReq = new JsonArrayRequest(Request.Method.GET,
                 url, null,
@@ -119,6 +110,7 @@ public class MyIntentService extends IntentService {
         });
         queue.add(jsonObjReq);
     }
+    */
 
     public void setNotification(int inCompleteItems) {
 

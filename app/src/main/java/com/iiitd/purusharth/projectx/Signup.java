@@ -234,7 +234,7 @@ public class Signup extends AppCompatActivity {
         params.put("gender", Gender);
         params.put("photo", photo);
         params.put("isgmail", "false");
-
+        Log.e("MANAGE", params.toString());
         post("http://192.168.55.245:3000/users/register", "register", params);
 
 

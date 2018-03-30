@@ -10,13 +10,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:weightSum="1">
 
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="280dp"
             android:layout_marginBottom="10dp"
+            android:layout_weight="0.33"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_spashscreen" />
@@ -65,14 +67,6 @@
             android:padding="12dp"
             android:text="Login"
             android:textColor="#FFFFFF" />'
-
-        <com.google.android.gms.common.SignInButton
-            android:id="@+id/btn_sign_in"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="20dp"
-            android:textAlignment="center" />
 
         <TextView
             android:id="@+id/link_signup"

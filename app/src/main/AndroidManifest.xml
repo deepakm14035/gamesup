@@ -23,6 +23,28 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".UserActivities"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Settings1"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Hot1"
+            android:label="allActivities"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Add1"
+            android:label="createActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
             android:name=".InfoActivity"
             android:label="@string/title_activity_info"
             android:screenOrientation="portrait"
@@ -51,7 +73,7 @@
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
             android:name=".FirstActivity"
-            android:label="Welcome"
+            android:label="IIITD MeetUp"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -70,7 +92,11 @@
             android:label="@string/title_activity_help"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        <activity android:name=".MoreDetails"></activity>
+        <activity android:name=".MoreDetails" />
+        <activity
+            android:name=".navAll2Activity"
+            android:label="@string/title_activity_nav_all2"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

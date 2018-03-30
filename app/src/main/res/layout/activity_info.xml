@@ -240,6 +240,15 @@
         </RelativeLayout>
     </ScrollView>
 
+    <Button
+        android:id="@+id/join"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/scroll"
+        android:background="@drawable/ripple"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Join Event"
+        android:textColor="#FFFFFF" />
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab3"
         android:layout_width="wrap_content"
@@ -254,13 +263,5 @@
         diagonal:fabSize="normal"
         diagonal:srcCompat="@drawable/ic_chat" />
 
-    <Button
-        android:id="@+id/join"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/scroll"
-        android:background="@drawable/ripple"
-        android:fontFamily="sans-serif-condensed"
-        android:text="Join Event"
-        android:textColor="#FFFFFF" />
+
 </RelativeLayout>

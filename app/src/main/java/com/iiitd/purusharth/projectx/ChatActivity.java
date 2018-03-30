@@ -35,7 +35,7 @@ import cz.msebera.android.httpclient.Header;
 
 public class ChatActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String MESSAGES_ENDPOINT = "http://192.168.55.245:3000";
-    static final String username = MainActivity.uname;
+    static final String username = "shit";
     EditText messageInput;
     String activityid;
     Button sendButton;

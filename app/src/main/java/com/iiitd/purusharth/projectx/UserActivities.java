@@ -2,8 +2,11 @@ package com.iiitd.purusharth.projectx;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -18,14 +21,9 @@ import android.widget.TextView;
 import com.android.volley.RequestQueue;
 
 
-public class MainActivity extends AppCompatActivity {
+public class UserActivities extends AppCompatActivity {
 
-    public static DBHelper dBase;
     RequestQueue queue;
-    // static String uname = "";
-    //public static String uid = "";
-    //public static String token = "";
-    //public static int size = 0;
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -44,12 +42,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.my_activities_main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("  MeetUp");
+        toolbar.setTitle("My Activities");
         setSupportActionBar(toolbar);
-        dBase = new DBHelper(this);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -64,14 +61,13 @@ public class MainActivity extends AppCompatActivity {
                 R.drawable.ic_settings
         };
 
-        //TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        //tabLayout.setupWithViewPager(mViewPager);
-        //tabLayout.getTabAt(1).select();
-        //tabLayout.getTabAt(0).setIcon(ICONS[0]);
-        //tabLayout.getTabAt(1).setIcon(ICONS[1]);
-        //tabLayout.getTabAt(2).setIcon(ICONS[2]);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(mViewPager);
+        tabLayout.getTabAt(1).select();
+        tabLayout.getTabAt(0).setIcon(ICONS[0]);
+        tabLayout.getTabAt(1).setIcon(ICONS[1]);
 
-        //tabLayout.getTabAt(1).getIcon().setColorFilter(Color.parseColor("#FFA500"), PorterDuff.Mode.SRC_IN);
+        tabLayout.getTabAt(1).getIcon().setColorFilter(Color.parseColor("#FFA500"), PorterDuff.Mode.SRC_IN);
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         //uid = preferences.getString("uid", "error");
@@ -121,7 +117,6 @@ public class MainActivity extends AppCompatActivity {
         queue.add(jsonObjReq);
     }
     */
-
 
 
     @Override
@@ -182,11 +177,9 @@ public class MainActivity extends AppCompatActivity {
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position) {
                 case 0:
-                    return Add.newInstance();
+                    return MyActivities.newInstance();
                 case 1:
-                    return Hot.newInstance();
-                case 2:
-                    return Settings.newInstance();
+                    return PastActivities.newInstance();
                 default:
                     return PlaceholderFragment.newInstance("You should not see this");
             }
@@ -203,8 +196,6 @@ public class MainActivity extends AppCompatActivity {
                 case 0:
                     return "";
                 case 1:
-                    return "";
-                case 2:
                     return "";
             }
             return null;

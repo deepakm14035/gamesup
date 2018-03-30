@@ -21,11 +21,8 @@ import java.util.Locale;
 
 //Fragment for various user related button
 
-public class Add extends Fragment {
+public class MyActivities extends Fragment {
 
-    Button addEvent;
-    Button openHelp;
-    Button logout;
     LinearLayout myEvents;
     View myView;
 
@@ -34,13 +31,13 @@ public class Add extends Fragment {
     HashMap<String, String> named_address;
 
 
-    public Add() {
+    public MyActivities() {
         // Required empty public constructor
     }
 
     // TODO: Rename and change types and number of parameters
-    public static Add newInstance() {
-        Add fragment = new Add();
+    public static MyActivities newInstance() {
+        MyActivities fragment = new MyActivities();
         return fragment;
     }
 
@@ -54,10 +51,7 @@ public class Add extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_add, container, false);
-        addEvent = (Button) view.findViewById(R.id.newEvent);
-        openHelp = (Button) view.findViewById(R.id.help);
-        logout = (Button) view.findViewById(R.id.logout);
+        View view = inflater.inflate(R.layout.fragment_my_activities, container, false);
         myView = view;
         this.named_address = new HashMap<String, String>();
         //"28.547126,77.273158","28.609027,77.035058","28.749967,77.117674"
@@ -65,27 +59,6 @@ public class Add extends Fragment {
         named_address.put("NSIT", "28.609027,77.035058");
         named_address.put("DTU", "28.749967,77.117674");
         myEvents = (LinearLayout) view.findViewById(R.id.eventLayout);
-        addEvent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getContext(), AddEvent.class);
-                startActivityForResult(i, 0);
-            }
-
-        });
-        openHelp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getContext(), Help.class);
-                startActivity(i);
-            }
-        });
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                logoutSession();
-            }
-        });
         Log.e("ERROR", "onCreateView called");
 
         //Dynamically add views-----------------------------------------------------

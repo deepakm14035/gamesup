@@ -25,7 +25,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -44,11 +43,6 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
-
-import static com.iiitd.purusharth.projectx.MainActivity.token;
-import static com.iiitd.purusharth.projectx.MainActivity.uid;
 
 //Add activity to server
 
@@ -68,6 +62,7 @@ public class AddEvent extends AppCompatActivity implements OnMapReadyCallback {
     TextView ea1;
     EditText ea2;
     RequestQueue queue;
+    String userID, token, username;
     private String[] activitiesArray;
     private String[] venueArray;
 
@@ -75,6 +70,12 @@ public class AddEvent extends AppCompatActivity implements OnMapReadyCallback {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
+        Intent intent = getIntent();
+        userID = intent.getStringExtra("uid");
+        token = intent.getStringExtra("token");
+        username = intent.getStringExtra("username");
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Create Event");
         setSupportActionBar(toolbar);
@@ -219,8 +220,6 @@ public class AddEvent extends AppCompatActivity implements OnMapReadyCallback {
         String strDate = sdf.format(c.getTime());
         thisEvent.setPostedDate(strDate);
 
-        thisEvent.setUserID(MainActivity.uid);
-        thisEvent.setName(MainActivity.uname);
 
         postToServer(thisEvent);
         //AddEventToDatabase();
@@ -232,24 +231,26 @@ public class AddEvent extends AppCompatActivity implements OnMapReadyCallback {
         JSONObject reqObj = new JSONObject();
 
         try {
-            reqObj.put("ac_name", e.getName());
+            reqObj.put("ac_name", username);
             reqObj.put("name", e.getActivityName());
-            reqObj.put("userid", e.getUserID());
+            reqObj.put("userid", userID);
             reqObj.put("venue", e.getVenue());
             reqObj.put("venue_name", e.getVenue_name());
             reqObj.put("post_time", e.getPostedDate());
             reqObj.put("desc", e.getDesc());
+            reqObj.put("token", token);
+            Log.d("asd", reqObj.toString());
             Toast.makeText(getBaseContext(), reqObj.toString(), Toast.LENGTH_LONG).show();
-            makeJsonArrayReq(reqObj);
+            makeJsonArrayReq(reqObj, e.getUserID());
         } catch (Exception error) {
             Toast.makeText(getBaseContext(), error.toString(), Toast.LENGTH_LONG).show();
         }
     }
 
 
-    private void makeJsonArrayReq(JSONObject req) {
+    private void makeJsonArrayReq(JSONObject req, String user) {
         final ProgressDialog progressDialog = new ProgressDialog(this);
-        String url = "http://192.168.55.245:3000/users/" + uid + "/activity";
+        String url = "http://192.168.55.245:3000/users" + "/addactivity";
         progressDialog.setMessage("Pushing to Server...");
         progressDialog.show();
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
@@ -267,14 +268,7 @@ public class AddEvent extends AppCompatActivity implements OnMapReadyCallback {
                 VolleyLog.d("ERROR", "Error: " + error.getMessage());
                 showPostError(error.toString());
             }
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("x-access-token", token);
-                return params;
-            }
-        };
+        });
         queue.add(jsonObjReq);
     }
 
@@ -292,7 +286,7 @@ public class AddEvent extends AppCompatActivity implements OnMapReadyCallback {
     }
 
     void AddEventToDatabase() {
-        MainActivity.dBase.addEntry(thisEvent);
+        Hot1.dBase.addEntry(thisEvent);
         Intent returnIntent = getIntent();
         setResult(RESULT_OK, returnIntent);
         finish();

@@ -37,8 +37,6 @@ import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static com.iiitd.purusharth.projectx.MainActivity.token;
-
 public class InfoActivity extends AppCompatActivity {
     Button join;
     RequestQueue queue;
@@ -54,6 +52,9 @@ public class InfoActivity extends AppCompatActivity {
     TextView aboutme;
     TextView desc;
     TextView pCount;
+    String token, userid;
+
+    ProgressDialog gDialog;
 
     CircleImageView avatar;
 
@@ -67,6 +68,10 @@ public class InfoActivity extends AppCompatActivity {
         DiagonalLayout dl = (DiagonalLayout) findViewById(R.id.diagonalLayout);
         KenBurnsView kv = (KenBurnsView) findViewById(R.id.kv);
 
+        token = getIntent().getStringExtra("token");
+        userid = getIntent().getStringExtra("userid");
+
+
         nameView = (TextView) findViewById(R.id.name);
         avatar = (CircleImageView) findViewById(R.id.avatar);
         gender = (TextView) findViewById(R.id.gender);
@@ -76,7 +81,13 @@ public class InfoActivity extends AppCompatActivity {
         aboutme = (TextView) findViewById(R.id.aboutme);
         desc = (TextView) findViewById(R.id.desc);
         pCount = (TextView) findViewById(R.id.pCount);
+
+        thisEvent = (ExtendedEventActivity) getIntent().getSerializableExtra("event");
+        nameView.setText(thisEvent.getName());
+        desc.setText(thisEvent.getDesc());
+
         join = (Button) findViewById(R.id.join);
+
         join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,13 +106,63 @@ public class InfoActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        thisEvent = (ExtendedEventActivity) getIntent().getSerializableExtra("event");
         kv.setImageResource(ActivityImages.getImageResource(thisEvent.getActivityName().toLowerCase()));
         uid = thisEvent.getUserID();
         aid = thisEvent.getActivityID();
         queue = Volley.newRequestQueue(this);
         FetchUserData();
+        checkJoin();
+        Log.d("asd", userid + "," + uid);
 
+
+    }
+
+    void buttonVisibility() {
+
+    }
+
+    void checkJoin() {
+        String url = "http://192.168.55.245:3000/users/" + "checkjoin/";
+        Log.d("asd", "checking");
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("token", token);
+            obj.put("userid", userid);
+            obj.put("activityid", thisEvent.getActivityID());
+
+        } catch (Exception e1) {
+        }
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+                url, obj,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e("MANAGE", response.toString());
+                        Log.d("asd", "checking response");
+
+                        // Toast.makeText(getBaseContext(),response.toString(),Toast.LENGTH_LONG).show();
+                        try {
+                            String ans = response.getString("status");
+                            if (ans.equalsIgnoreCase("true")) {
+                                success();
+                            }
+                        } catch (Exception e) {
+                            Toast.makeText(getBaseContext(), e.toString(), Toast.LENGTH_LONG).show();
+                        }
+                        gDialog.hide();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("ERROR", "Error: " + error.getMessage());
+                Toast.makeText(getBaseContext(), error.toString(), Toast.LENGTH_LONG).show();
+                // hide the progress dialog
+                gDialog.hide();
+            }
+        });
+        queue.add(jsonObjReq);
     }
 
     void confirmJoinAction() {
@@ -135,15 +196,25 @@ public class InfoActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             getWindow().setStatusBarColor(getResources().getColor(R.color.colorAccent));
         }
+        gDialog.hide();
     }
 
     private void makeJoinReq() {
-        String url = "http://192.168.55.245:3000/users/" + uid + "/joinactivity/" + aid;
+        String url = "http://192.168.55.245:3000/users/" + "joinactivity";
         final ProgressDialog pDialog = new ProgressDialog(this);
         pDialog.setMessage("Joining Activity...");
         pDialog.show();
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-                url, null,
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("token", token);
+            obj.put("activityid", aid);
+            obj.put("userid", userid);
+
+
+        } catch (Exception e1) {
+        }
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+                url, obj,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -163,26 +234,35 @@ public class InfoActivity extends AppCompatActivity {
         }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("x-access-token", token);
-                return params;
+                HashMap<String, String> headers = new HashMap<String, String>();
+                //headers.put("Content-Type", "application/json");
+                headers.put("token", token);
+                return headers;
             }
         };
         queue.add(jsonObjReq);
     }
 
     void FetchUserData() {
-        String url = "http://192.168.55.245:3000/users/" + uid + "/info";
-        final ProgressDialog pDialog = new ProgressDialog(this);
-        pDialog.setMessage("Fetching user data...");
-        pDialog.show();
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-                url, null,
+        String url = "http://192.168.55.245:3000/users/" + "userinfo";
+        gDialog = new ProgressDialog(this);
+        gDialog.setMessage("Fetching user data...");
+        gDialog.show();
+
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("token", token);
+            obj.put("userid", uid);
+
+        } catch (Exception e1) {
+        }
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+                url, obj,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.e("ERROR", response.toString());
-                        pDialog.hide();
                         setUserData(response);
                     }
                 }, new Response.ErrorListener() {
@@ -192,16 +272,9 @@ public class InfoActivity extends AppCompatActivity {
                 VolleyLog.d("ERROR", "Error: " + error.getMessage());
                 Log.e("ERROR", error.toString());
                 Toast.makeText(getBaseContext(), error.toString(), Toast.LENGTH_LONG).show();
-                pDialog.hide();
+                gDialog.hide();
             }
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("x-access-token", token);
-                return params;
-            }
-        };
+        });
         queue.add(jsonObjReq);
     }
 
@@ -209,7 +282,9 @@ public class InfoActivity extends AppCompatActivity {
         try {
             if (obj.getString("name") != null)
                 nameView.setText(obj.getString("name"));
-            if (obj.getString("name").equalsIgnoreCase(MainActivity.uname)) {
+            if (thisEvent.getUserID().toString().equals(userid)) {
+                Log.d("asd", "creator");
+                Toast.makeText(getBaseContext(), "you are the creator", Toast.LENGTH_LONG).show();
                 join.setVisibility(View.GONE);
             } else {
                 join.setVisibility(View.VISIBLE);
@@ -250,6 +325,7 @@ public class InfoActivity extends AppCompatActivity {
             Toast.makeText(getBaseContext(), e.toString(), Toast.LENGTH_LONG).show();
             Log.e("YOLO", e.toString());
         }
+        gDialog.hide();
     }
 
     public Bitmap getImage(String photo) {

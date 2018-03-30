@@ -143,4 +143,8 @@
         completions."
     </string>
     <string name="title_activity_help">Help</string>
+    <string name="title_activity_nav_all2">navAll2Activity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>
