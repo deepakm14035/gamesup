@@ -23,6 +23,7 @@ import com.android.volley.RequestQueue;
 
 public class UserActivities extends AppCompatActivity {
 
+    public String userID, token;
     RequestQueue queue;
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -54,6 +55,10 @@ public class UserActivities extends AppCompatActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+
+        userID = getIntent().getStringExtra("userid");
+        token = getIntent().getStringExtra("token");
+
 
         final int[] ICONS = new int[]{
                 R.drawable.ic_action_name,
@@ -187,7 +192,7 @@ public class UserActivities extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 3;
+            return 2;
         }
 
         @Override

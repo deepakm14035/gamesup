@@ -10,25 +10,26 @@
     android:weightSum="1"
     tools:context="com.iiitd.purusharth.projectx.UserActivities">
 
-        <!-- TODO: Update blank fragment layout -->
+    <!-- TODO: Update blank fragment layout -->
 
 
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingTop="15dp"
-            android:text="Your Events"
-            android:textSize="18sp"
-            tools:fontFamily="sans-serif-light" />
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingTop="15dp"
+        android:text="Your Events"
+        android:textSize="18sp"
+        tools:fontFamily="sans-serif-light" />
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
         <LinearLayout
-            android:id="@+id/eventLayout"
+            android:id="@+id/eventLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:elevation="10dp"
@@ -42,4 +43,4 @@
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
-    </LinearLayout>
+</LinearLayout>
